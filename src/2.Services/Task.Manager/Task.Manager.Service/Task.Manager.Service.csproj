@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <Folder Include="Application\TaskManagement\CommandHandlers\" />
+    <Folder Include="Application\TaskManagement\QueryHandlers\" />
     <Folder Include="Domain\Enums\" />
+    <Folder Include="Domain\Entities\" />
+    <Folder Include="Infrastructure\Data\Migrations\" />
     <Folder Include="Infrastructure\Services\Extensions\" />
   </ItemGroup>
 
