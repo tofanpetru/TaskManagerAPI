@@ -1,14 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <PackageReference Include="FluentResults" />
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="FluentValidation.AspNetCore" />
     <PackageReference Include="MediatR" />
+    <PackageReference Include="NetEscapades.EnumGenerators" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commons\Entities\" />
-    <Folder Include="Commons\Enums\" />
-    <Folder Include="TaskManagement\Command\" />
-    <Folder Include="TaskManagement\Queries\" />
+    <ProjectReference Include="..\..\..\1.Utilities\Core.Domain\Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>

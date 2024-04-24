@@ -4,12 +4,15 @@
         <RootNamespace>WebHost</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\1.Utilities\Core\Core.csproj" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Serilog.AspNetCore" />
         <PackageReference Include="WilderMinds.SwaggerHierarchySupport" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\2.Services\Task.Manager\Task.Manager.Routing\Task.Manager.Routing.csproj" />
+      <ProjectReference Include="..\..\2.Services\Task.Manager\Task.Manager.Service\Task.Manager.Service.csproj" />
     </ItemGroup>
 </Project>
