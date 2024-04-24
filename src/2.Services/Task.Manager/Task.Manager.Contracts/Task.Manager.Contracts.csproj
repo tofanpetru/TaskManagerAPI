@@ -9,5 +9,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\1.Utilities\Core.Domain\Core.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commons\Entities\" />
+    <Folder Include="Commons\Enums\" />
+    <Folder Include="TaskManagement\Command\" />
+    <Folder Include="TaskManagement\Queries\" />
+  </ItemGroup>
 
 </Project>
