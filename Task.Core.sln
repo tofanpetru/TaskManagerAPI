@@ -25,9 +25,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Hosts", "3.Hosts", "{33E7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Api.WebHost", "src\3.Hosts\Azuro.Core.Api.WebHost\TaskManager.Api.WebHost.csproj", "{AE03EA55-3EA4-4A2F-870A-F912A0E5CC63}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TaskManager", "TaskManager", "{EA40A86D-43AE-4E52-B744-66E048ECAABC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task.Manager", "Task.Manager", "{EA40A86D-43AE-4E52-B744-66E048ECAABC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "src\1.Utilities\Core.Domain\Core.Domain.csproj", "{508D29B8-6C91-4677-BB41-D1249B04C2E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Manager.Contracts", "src\2.Services\Task.Manager\Task.Manager.Contracts\Task.Manager.Contracts.csproj", "{D86BA0CA-45D5-4920-827F-A9214E4A4D58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Manager.Routing", "src\2.Services\Task.Manager\Task.Manager.Routing\Task.Manager.Routing.csproj", "{CD05E2C4-BFA7-4C45-94B0-51C7B1FC326A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.Manager.Service", "src\2.Services\Task.Manager\Task.Manager.Service\Task.Manager.Service.csproj", "{6550CE66-A9F1-49DD-819B-D81A10103209}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +53,18 @@ Global
 		{508D29B8-6C91-4677-BB41-D1249B04C2E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{508D29B8-6C91-4677-BB41-D1249B04C2E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{508D29B8-6C91-4677-BB41-D1249B04C2E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D86BA0CA-45D5-4920-827F-A9214E4A4D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D86BA0CA-45D5-4920-827F-A9214E4A4D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D86BA0CA-45D5-4920-827F-A9214E4A4D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D86BA0CA-45D5-4920-827F-A9214E4A4D58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD05E2C4-BFA7-4C45-94B0-51C7B1FC326A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD05E2C4-BFA7-4C45-94B0-51C7B1FC326A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD05E2C4-BFA7-4C45-94B0-51C7B1FC326A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD05E2C4-BFA7-4C45-94B0-51C7B1FC326A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6550CE66-A9F1-49DD-819B-D81A10103209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6550CE66-A9F1-49DD-819B-D81A10103209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6550CE66-A9F1-49DD-819B-D81A10103209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6550CE66-A9F1-49DD-819B-D81A10103209}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +74,9 @@ Global
 		{AE03EA55-3EA4-4A2F-870A-F912A0E5CC63} = {33E7EA83-F1BE-4577-94E9-BED8F981A15B}
 		{EA40A86D-43AE-4E52-B744-66E048ECAABC} = {10FCA69B-9702-4C3E-B860-15AA0E3AE9B8}
 		{508D29B8-6C91-4677-BB41-D1249B04C2E1} = {5566023E-5FC6-4ED5-90DC-B10FB4480817}
+		{D86BA0CA-45D5-4920-827F-A9214E4A4D58} = {EA40A86D-43AE-4E52-B744-66E048ECAABC}
+		{CD05E2C4-BFA7-4C45-94B0-51C7B1FC326A} = {EA40A86D-43AE-4E52-B744-66E048ECAABC}
+		{6550CE66-A9F1-49DD-819B-D81A10103209} = {EA40A86D-43AE-4E52-B744-66E048ECAABC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {55DD64A0-C8C2-4BB9-B9F5-694D7897E762}

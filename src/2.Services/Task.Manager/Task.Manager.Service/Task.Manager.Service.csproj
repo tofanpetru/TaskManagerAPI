@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Folder Include="Domain\Enums\" />
+    <Folder Include="Infrastructure\Services\Extensions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\1.Utilities\Core\Core.csproj" />
+    <ProjectReference Include="..\Task.Manager.Contracts\Task.Manager.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
