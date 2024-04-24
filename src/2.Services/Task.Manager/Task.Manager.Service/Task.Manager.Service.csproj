@@ -1,7 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <Folder Include="Application\TaskManagement\CommandHandlers\" />
+    <Folder Include="Application\TaskManagement\QueryHandlers\" />
     <Folder Include="Domain\Enums\" />
+    <Folder Include="Domain\Entities\" />
+    <Folder Include="Infrastructure\Data\Migrations\" />
     <Folder Include="Infrastructure\Services\Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

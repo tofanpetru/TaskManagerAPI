@@ -9,10 +9,8 @@
         <PackageReference Include="FluentResults.Extensions.AspNetCore" />
         <PackageReference Include="FluentResults.Extensions.FluentAssertions" />
         <PackageReference Include="MediatR" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" />
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
