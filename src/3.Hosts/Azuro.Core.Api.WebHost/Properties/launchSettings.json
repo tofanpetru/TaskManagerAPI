@@ -1,0 +1,14 @@
+﻿{
+  "profiles": {
+    "Task.Core.Api.WebHost": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7240",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ApplicationName": "Task.Core"
+      }
+    }
+  }
+}
