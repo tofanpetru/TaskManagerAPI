@@ -4,6 +4,8 @@ using Core.Logging;
 using Core.Swagger;
 using Serilog;
 using SwaggerHierarchySupport;
+using Task.Manager.Routing;
+using Task.Manager.Service;
 
 const string CorsPolicyName = "AllowAllOrigins";
 
@@ -25,6 +27,8 @@ builder.Services
                           });
     });
 
+builder.Services.AddTaskManagerService(builder.Configuration);
+
 builder.Host.UseSerilog();
 
 var app = builder.Build();
@@ -37,6 +41,7 @@ var app = builder.Build();
 //app.UseAuthorization();
 
 //Endpoints
+app.UseTaskManagerEndpoints();
 
 app.UseSwagger();
 app.UseSwaggerUI(opts =>
