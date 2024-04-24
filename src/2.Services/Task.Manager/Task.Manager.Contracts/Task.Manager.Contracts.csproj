@@ -4,5 +4,11 @@
     <PackageReference Include="FluentValidation.AspNetCore" />
     <PackageReference Include="MediatR" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commons\Entities\" />
+    <Folder Include="Commons\Enums\" />
+    <Folder Include="TaskManagement\Command\" />
+    <Folder Include="TaskManagement\Queries\" />
+  </ItemGroup>
 
 </Project>
