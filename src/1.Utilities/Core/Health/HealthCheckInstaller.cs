@@ -8,13 +8,13 @@ public static class HealthCheckInstaller
 {
     public static WebApplication UseHealthCheckPaths(this WebApplication app)
     {
-        app.MapHealthChecks("/healthz/ready",
+        app.MapHealthChecks(HealthConstants.ReadinessCheckEndpoint,
             new HealthCheckOptions
             {
-                Predicate = healthCheck => healthCheck.Tags.Contains("ready")
+                Predicate = healthCheck => healthCheck.Tags.Contains(HealthConstants.ReadyTag)
             });
 
-        app.MapHealthChecks("/healthz/live",
+        app.MapHealthChecks(HealthConstants.LivenessCheckEndpoint,
             new HealthCheckOptions
             {
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse

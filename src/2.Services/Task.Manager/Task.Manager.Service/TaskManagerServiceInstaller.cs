@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Core.Health;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,11 @@ public static class TaskManagerServiceInstaller
             });
         });
         services.AddScoped<ITaskManagerContext, TaskManagerContext>();
+
+        services.AddHealthChecks()
+            .AddDbContextCheck<TaskManagerContext>(
+                name: "task-manager-context",
+                tags: HealthConstants.ReadinessTags);
 
         return services;
     }

@@ -2,6 +2,7 @@
 using Core.Health;
 using Core.Logging;
 using Core.Swagger;
+using Core.Swagger.DocumentFilters;
 using Serilog;
 using SwaggerHierarchySupport;
 using Task.Manager.Routing;
@@ -13,7 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddUtilities()
-    .AddSwagger()
+    .AddSwagger(sa =>
+    {
+        sa.DocumentFilter<HealthChecksDocumentFilter>();
+    })
     //.AddAuthorization()
     .AddSerilogLogging(builder.Configuration)
     .AddCors(options =>

@@ -1,13 +1,13 @@
-﻿using Core.Configurations;
-using Core.Extensions;
+﻿using Core.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Task.Manager.Service.Domain.DataConnections;
+using Task.Manager.Service.Domain.DataModels;
 
 namespace Task.Manager.Service.Infrastructure.Data;
 
 internal sealed class TaskManagerContext(DbContextOptions<TaskManagerContext> options) : DbContext(options), ITaskManagerContext
 {
-    public DbSet<Domain.DataModels.TaskDataModel> Tasks { get; set; }
+    public DbSet<TaskDataModel> Tasks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

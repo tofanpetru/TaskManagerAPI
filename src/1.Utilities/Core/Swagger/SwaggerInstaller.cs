@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
+using Core.Swagger.DocumentFilters;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -12,7 +13,7 @@ namespace Core.Swagger;
 
 public static class SwaggerInstaller
 {
-    public static IServiceCollection AddSwagger(this IServiceCollection services)
+    public static IServiceCollection AddSwagger(this IServiceCollection services, Action<SwaggerGenOptions>? setupAction = default)
     {
         services.Configure<JsonOptions>(o => o.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
         services.Configure<MvcJsonOptions>(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
@@ -34,7 +35,8 @@ public static class SwaggerInstaller
 
         services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(setupAction);
+
         return services;
     }
 
