@@ -7,6 +7,6 @@ internal static class EndpointConstants
     public const string TaskManagerBasePath = BasePath + "tasks";
     public const string TaskManagerTag = "Task Manager: ";
 
-    public const string TaskActionsTag = TaskManagerTag + "Task Actions";
+    public const string TaskCommandsTag = TaskManagerTag + "Task Actions";
     public const string TaskQueriesTag = TaskManagerTag + "Task Queries";
 }
