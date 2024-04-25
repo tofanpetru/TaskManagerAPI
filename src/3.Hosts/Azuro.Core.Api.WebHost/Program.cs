@@ -4,7 +4,6 @@ using Core.Logging;
 using Core.Swagger;
 using Serilog;
 using SwaggerHierarchySupport;
-using Swashbuckle.AspNetCore.SwaggerUI;
 using Task.Manager.Routing;
 using Task.Manager.Service;
 
@@ -35,6 +34,7 @@ builder.Host.UseSerilog();
 var app = builder.Build();
 
 //Migrations
+app.ApplyTaskManagerMigrations();
 
 //Security
 //todo 
