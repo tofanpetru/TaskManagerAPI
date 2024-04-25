@@ -3,9 +3,8 @@
 namespace Task.Manager.Contracts.Commons.Enums;
 
 [EnumExtensions]
-internal enum AllowedSortColumn
+public enum AllowedSortColumn
 {
-    Unknown,
     Priority,
     Status,
     CreatedOn,

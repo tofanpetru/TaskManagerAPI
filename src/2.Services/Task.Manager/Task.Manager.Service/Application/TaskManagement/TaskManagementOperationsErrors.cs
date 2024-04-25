@@ -30,4 +30,10 @@ internal static class TaskManagementOperationsErrors
     public const string TaskNotFound = "Task not found";
     public const string RetrieveTaskErrorLog = "Error occurred while retrieving task with ID: {TaskId}";
     public const string RetrieveTaskFailError = "Failed to retrieve the task";
+
+    //GetAllTasksQueryHandler
+    public const string RetrieveAllTasksWithFiltersLog = "Retrieving all tasks with filters and sorting.";
+    public const string RetrieveAllTasksErrorLog = "Error occurred while retrieving all tasks";
+    public const string RetriveAllTasksNotSupportedSortColumnErrorLog = "Not supported sort column specified: {column}";
+    public const string RetrieveAllTasksFailError = "Failed to retrieve all tasks";
 }

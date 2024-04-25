@@ -5,7 +5,7 @@ namespace Core.Domain.Entities.Pagination;
 public class PagedList<T>(List<T> items, int page, int pageSize, int totalCount)
 {
     [JsonPropertyName("items")]
-    public List<T> Items { get; } = items;
+    public List<T> Items { get; } = items ?? [];
 
     [JsonPropertyName("page")]
     public int Page { get; } = page;
