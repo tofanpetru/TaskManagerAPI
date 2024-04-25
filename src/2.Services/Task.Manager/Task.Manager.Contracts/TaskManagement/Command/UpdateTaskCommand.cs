@@ -10,7 +10,7 @@ public record UpdateTaskCommand(
     string Title,
     string Description,
     int Priority,
-    TaskStatus Status) : IRequest<Result<bool>>;
+    TaskStatus Status) : IRequest<Result>;
 
 public class UpdateTaskCommandValidator : AbstractValidator<UpdateTaskCommand>
 {
