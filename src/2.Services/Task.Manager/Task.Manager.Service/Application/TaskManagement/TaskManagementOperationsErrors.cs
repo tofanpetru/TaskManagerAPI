@@ -19,6 +19,7 @@ internal static class TaskManagementOperationsErrors
     public const string UpdateNonExistentTaskWarning = "Attempted to update a non-existent task with ID: {TaskId}";
     public const string UpdatingTaskIdLog = "Updating task with ID: {TaskId}";
     public const string UpdateTaskNotFound = "Task not found";
+    public const string UpdateTaskAlreadyExistsLog = "Task with ID {id} already has the requested values. Skipping update";
     public const string UpdateTaskSuccessLog = "Task updated successfully with ID: {TaskId}";
     public const string UpdateTaskErrorLog = "Error occurred while updating task with ID: {TaskId}";
     public const string UpdateTaskFailError = "Failed to update the task";

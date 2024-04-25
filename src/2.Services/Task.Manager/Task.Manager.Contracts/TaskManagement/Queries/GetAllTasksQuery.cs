@@ -1,7 +1,6 @@
 ﻿using FluentResults;
 using FluentValidation;
 using MediatR;
-using Task.Manager.Contracts.Commons.Enums;
 using TaskStatus = Task.Manager.Contracts.Commons.Enums.TaskStatus;
 
 namespace Task.Manager.Contracts.TaskManagement.Queries;

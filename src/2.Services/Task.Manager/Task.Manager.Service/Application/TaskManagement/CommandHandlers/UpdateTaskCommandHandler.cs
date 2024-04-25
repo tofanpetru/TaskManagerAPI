@@ -7,7 +7,8 @@ using Task.Manager.Service.Domain.DataConnections;
 
 namespace Task.Manager.Service.Application.TaskManagement.CommandHandlers;
 
-internal sealed class UpdateTaskCommandHandler(ITaskManagerContext context, ILogger<UpdateTaskCommandHandler> logger) : IRequestHandler<UpdateTaskCommand, Result>
+internal sealed class UpdateTaskCommandHandler(ITaskManagerContext context, ILogger<UpdateTaskCommandHandler> logger) 
+    : IRequestHandler<UpdateTaskCommand, Result>
 {
     private readonly ITaskManagerContext _context = context;
     private readonly ILogger<UpdateTaskCommandHandler> _logger = logger;
@@ -15,7 +16,7 @@ internal sealed class UpdateTaskCommandHandler(ITaskManagerContext context, ILog
     public async Task<Result> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
     {
         try
-        {   //TODO CHECK if we need to update
+        {
             var task = await _context.Tasks.FirstOrDefaultAsync(
                 t => t.Id == request.Id,
                 cancellationToken);
@@ -35,23 +36,38 @@ internal sealed class UpdateTaskCommandHandler(ITaskManagerContext context, ILog
                 TaskManagementOperationsErrors.UpdatingTaskIdLog,
                 request.Id);
 
-            task.Title = request.Title;
-            task.Description = request.Description;
-            task.Priority = request.Priority;
-            task.Status = request.Status;
+            if (task.Title != request.Title
+                || task.Description != request.Description
+                || task.Priority != request.Priority
+                || task.Status != request.Status)
+            {
+                task.Title = request.Title;
+                task.Description = request.Description;
+                task.Priority = request.Priority;
+                task.Status = request.Status;
 
-            _context.Tasks.Update(task);
-            await _context.SaveChangesAsync(cancellationToken);
+                _context.Tasks.Update(task);
+                await _context.SaveChangesAsync(cancellationToken);
+
+                _logger.LogInformation(
+                    TaskManagementOperationsErrors.UpdateTaskSuccessLog,
+                    task.Id);
+
+                return Result.Ok();
+            }
 
             _logger.LogInformation(
-                TaskManagementOperationsErrors.UpdateTaskSuccessLog,
-                task.Id);
+                TaskManagementOperationsErrors.UpdateTaskAlreadyExistsLog,
+                request.Id);
 
             return Result.Ok();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, TaskManagementOperationsErrors.UpdateTaskErrorLog, request.Id);
+            _logger.LogError(
+                ex,
+                TaskManagementOperationsErrors.UpdateTaskErrorLog,
+                request.Id);
 
             return Result.Fail(
                 new Error(
