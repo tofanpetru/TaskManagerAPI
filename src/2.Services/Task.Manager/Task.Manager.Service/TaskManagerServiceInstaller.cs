@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Task.Manager.Contracts.TaskManagement.Command;
+using Task.Manager.Service.Application.TaskManagement.CommandHandlers;
 using Task.Manager.Service.Domain.DataConnections;
 using Task.Manager.Service.Infrastructure.Data;
 
@@ -32,6 +33,11 @@ public static class TaskManagerServiceInstaller
             .AddDbContextCheck<TaskManagerContext>(
                 name: "task-manager-context",
                 tags: HealthConstants.ReadinessTags);
+
+        services.AddMediatR(x =>
+        {
+            x.RegisterServicesFromAssembly(typeof(CreateTaskCommandHandler).Assembly);
+        });
 
         return services;
     }
