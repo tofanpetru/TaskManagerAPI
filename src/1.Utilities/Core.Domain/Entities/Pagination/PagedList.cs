@@ -17,7 +17,7 @@ public class PagedList<T>(List<T> items, int page, int pageSize, int totalCount)
     public int TotalCount { get; } = totalCount;
 
     [JsonPropertyName("hasPreviousPage")]
-    public bool HasPreviousPage => PageSize > 1;
+    public bool HasPreviousPage => Page > 1;
 
     [JsonPropertyName("hasNextPage")]
     public bool HasNextPage => Page * PageSize < TotalCount;

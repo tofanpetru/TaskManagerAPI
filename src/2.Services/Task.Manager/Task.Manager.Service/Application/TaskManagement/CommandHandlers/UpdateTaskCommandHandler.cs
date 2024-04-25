@@ -7,7 +7,7 @@ using Task.Manager.Service.Domain.DataConnections;
 
 namespace Task.Manager.Service.Application.TaskManagement.CommandHandlers;
 
-internal sealed class UpdateTaskCommandHandler(ITaskManagerContext context, ILogger<UpdateTaskCommandHandler> logger) 
+internal sealed class UpdateTaskCommandHandler(ITaskManagerContext context, ILogger<UpdateTaskCommandHandler> logger)
     : IRequestHandler<UpdateTaskCommand, Result>
 {
     private readonly ITaskManagerContext _context = context;

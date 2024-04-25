@@ -1,6 +1,4 @@
-﻿using NetEscapades.EnumGenerators;
-
-namespace Task.Manager.Contracts.Commons.Enums;
+﻿namespace Task.Manager.Contracts.Commons.Enums;
 
 public enum TaskStatus
 {

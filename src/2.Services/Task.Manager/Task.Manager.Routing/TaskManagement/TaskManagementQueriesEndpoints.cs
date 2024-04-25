@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Task.Manager.Contracts.Commons.Enums;
 using Task.Manager.Contracts.TaskManagement.Queries;
 using ApiVersion = Asp.Versioning.ApiVersion;
 using TaskStatus = Task.Manager.Contracts.Commons.Enums.TaskStatus;
@@ -54,20 +55,16 @@ internal sealed class TaskManagementQueriesEndpoints : IEndpointsDefinition
     private static async Task<IResult> GetAllTasksAsync(
         [FromQuery] TaskStatus? status,
         [FromQuery] int? priority,
-        [FromQuery] DateTime? createdOn,
-        [FromQuery] DateTime? modifiedOn,
-        [FromQuery] int page,
-        [FromQuery] int pageSize,
-        [FromQuery] string? sortColumn,
+        [FromQuery] AllowedSortColumn? sortColumn,
         [FromQuery] SortOrder sortOrder,
-        IMediator mediator)
+        IMediator mediator,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10)
     {
         var operation = await mediator.Send(
             new GetAllTasksQuery(
                 status,
                 priority,
-                createdOn,
-                modifiedOn,
                 page,
                 pageSize,
                 sortColumn,

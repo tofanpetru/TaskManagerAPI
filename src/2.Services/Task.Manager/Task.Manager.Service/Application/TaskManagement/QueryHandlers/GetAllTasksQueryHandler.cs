@@ -28,27 +28,30 @@ internal sealed class GetAllTasksQueryHandler : IRequestHandler<GetAllTasksQuery
 
         IQueryable<TaskDataModel> queryable = _context.Tasks;
 
-        if (!query.Status.HasValue)
+        if (query.Status != null && query.Status.HasValue)
         {
             queryable = queryable.Where(t => t.Status == query.Status);
         }
 
-        if (query.Priority.HasValue)
+        if (query.Priority != null && query.Priority.HasValue)
         {
             queryable = queryable.Where(t => t.Priority == query.Priority.Value);
         }
 
-        if (!string.IsNullOrEmpty(query.SortColumn))
+        if (query.SortColumn != null && query.SortColumn.HasValue)
         {
             switch (query.SortColumn)
             {
-                case nameof(AllowedSortColumn.Status):
+                case AllowedSortColumn.Priority:
                     queryable = queryable.SortByPriority(query.SortOrder);
                     break;
-                case nameof(AllowedSortColumn.CreatedOn):
+                case AllowedSortColumn.Status:
+                    queryable = queryable.SortByStatus(query.SortOrder);
+                    break;
+                case AllowedSortColumn.CreatedOn:
                     queryable = queryable.SortByCreatedOn(query.SortOrder);
                     break;
-                case nameof(AllowedSortColumn.ModifiedOn):
+                case AllowedSortColumn.ModifiedOn:
                     queryable = queryable.SortByModifiedOn(query.SortOrder);
                     break;
                 default:
@@ -62,7 +65,8 @@ internal sealed class GetAllTasksQueryHandler : IRequestHandler<GetAllTasksQuery
             query.Page,
             query.PageSize,
             cancellationToken);
-
+            //TODO EARLY RETURN
+            //TODO CHECK STATUS FILTER
         var resultList = pagedList.Items.Select(task => new Contracts.Commons.Entities.Task
         {
             Id = task.Id,
