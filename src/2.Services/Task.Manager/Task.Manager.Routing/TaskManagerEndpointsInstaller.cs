@@ -8,7 +8,7 @@ public static class TaskManagerEndpointsInstaller
 {
     public static IApplicationBuilder UseTaskManagerEndpoints(this IApplicationBuilder app)
     {
-        app.UseEndpoints<TaskManagementActionsEndpoints>();
+        app.UseEndpoints<TaskManagementCommandsEndpoints>();
 
         return app;
     }

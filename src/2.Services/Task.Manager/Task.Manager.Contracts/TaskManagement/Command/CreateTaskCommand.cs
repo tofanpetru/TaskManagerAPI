@@ -25,9 +25,6 @@ public class CreateTaskCommandValidator : AbstractValidator<CreateTaskCommand>
         RuleFor(p => p.Priority)
             .GreaterThanOrEqualTo(0);
 
-        RuleFor(p => p.Priority)
-            .GreaterThanOrEqualTo(0);
-
         RuleFor(p => p.Status)
             .IsInEnum();
     }
