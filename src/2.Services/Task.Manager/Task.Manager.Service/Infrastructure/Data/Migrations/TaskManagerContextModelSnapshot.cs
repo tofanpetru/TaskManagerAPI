@@ -22,29 +22,11 @@ namespace Task.Manager.Service.Infrastructure.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Core.Domain.Entities.DataModels.IdentifiableEntity", b =>
+            modelBuilder.Entity("Task.Manager.Service.Domain.DataModels.TaskDataModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IdentifiableEntity");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentifiableEntity");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("Task.Manager.Contracts.Commons.Entities.Task", b =>
-                {
-                    b.HasBaseType("Core.Domain.Entities.DataModels.IdentifiableEntity");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -66,7 +48,9 @@ namespace Task.Manager.Service.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("Task");
+                    b.HasKey("Id");
+
+                    b.ToTable("Tasks", "tasks");
                 });
 #pragma warning restore 612, 618
         }

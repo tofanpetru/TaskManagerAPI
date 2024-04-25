@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Core.Configurations;
 
-public sealed class BaseDataModelConfiguration : IEntityTypeConfiguration<IdentifiableEntity>
+public sealed class BaseDataModelConfiguration<T> : IEntityTypeConfiguration<IdentifiableEntity<T>> where T : struct
 {
-    public void Configure(EntityTypeBuilder<IdentifiableEntity> builder)
+    public void Configure(EntityTypeBuilder<IdentifiableEntity<T>> builder)
     {
         builder.HasKey(b => b.Id);
     }

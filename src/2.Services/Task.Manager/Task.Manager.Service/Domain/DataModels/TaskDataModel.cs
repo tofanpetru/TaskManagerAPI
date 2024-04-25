@@ -1,9 +1,9 @@
 ﻿using Core.Domain.Entities.DataModels;
 using TaskStatus = Task.Manager.Contracts.Commons.Enums.TaskStatus;
 
-namespace Task.Manager.Contracts.Commons.Entities;
+namespace Task.Manager.Service.Domain.DataModels;
 
-public sealed class Task : BaseMixedDataModel<Guid>
+internal sealed class TaskDataModel : BaseMixedDataModel<Guid>
 {
     public required string Title { get; set; }
     public required string Description { get; set; }

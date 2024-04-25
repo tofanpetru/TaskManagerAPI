@@ -5,15 +5,12 @@ using Task.Manager.Service.Domain.DataConnections;
 
 namespace Task.Manager.Service.Infrastructure.Data;
 
-internal sealed class TaskManagerContext : DbContext, ITaskManagerContext
+internal sealed class TaskManagerContext(DbContextOptions<TaskManagerContext> options) : DbContext(options), ITaskManagerContext
 {
-    public TaskManagerContext(DbContextOptions<TaskManagerContext> options) : base(options) { }
-
-    public DbSet<Contracts.Commons.Entities.Task> Tasks { get; set; }
+    public DbSet<Domain.DataModels.TaskDataModel> Tasks { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BaseDataModelConfiguration).Assembly);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(TaskManagerContext).Assembly);
 
         base.OnModelCreating(modelBuilder);

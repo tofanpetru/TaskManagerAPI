@@ -1,6 +1,6 @@
 ﻿namespace Core.Domain.Entities.DataModels;
 
-public class IdentifiableEntity : IIdentifiableEntity<Guid>
+public class IdentifiableEntity<T> : IIdentifiableEntity<T> where T : struct
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public T Id { get; set; }
 }

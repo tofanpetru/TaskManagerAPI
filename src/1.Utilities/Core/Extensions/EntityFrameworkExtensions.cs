@@ -12,7 +12,7 @@ public static class EntityFrameworkExtensions
         {
             switch (entry.Entity)
             {
-                case BaseCreatedDataModel trackable:
+                case BaseMixedDataModel<Guid> trackable:
                     switch (entry.State)
                     {
                         case EntityState.Added:
