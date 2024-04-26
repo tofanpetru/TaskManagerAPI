@@ -2,6 +2,7 @@
 using Core.Pagination;
 using FluentResults;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Task.Manager.Contracts.Commons.Enums;
 using Task.Manager.Contracts.TaskManagement.Queries;
@@ -11,28 +12,65 @@ using Task.Manager.Service.Extensions;
 
 namespace Task.Manager.Service.Application.TaskManagement.QueryHandlers;
 
-internal sealed class GetAllTasksQueryHandler : IRequestHandler<GetAllTasksQuery, Result<PagedList<Contracts.Commons.Entities.Task>>>
+internal sealed class GetAllTasksQueryHandler(ITaskManagerContext context, ILogger<GetAllTasksQueryHandler> logger)
+        : IRequestHandler<GetAllTasksQuery, Result<PagedList<Contracts.Commons.Entities.Task>>>
 {
-    private readonly ITaskManagerContext _context;
-    private readonly ILogger<GetAllTasksQueryHandler> _logger;
-
-    public GetAllTasksQueryHandler(ITaskManagerContext context, ILogger<GetAllTasksQueryHandler> logger)
-    {
-        _context = context;
-        _logger = logger;
-    }
+    private readonly ITaskManagerContext _context = context;
+    private readonly ILogger<GetAllTasksQueryHandler> _logger = logger;
 
     public async Task<Result<PagedList<Contracts.Commons.Entities.Task>>> Handle(GetAllTasksQuery query, CancellationToken cancellationToken)
     {
         _logger.LogInformation(TaskManagementOperationsErrors.RetrieveAllTasksWithFiltersLog);
 
-        IQueryable<TaskDataModel> queryable = _context.Tasks;
-
-        if (query.Status != null && query.Status.HasValue)
+        var queryable = _context.Tasks.AsNoTracking();
+        if (query.Status.HasValue)
         {
-            queryable = queryable.Where(t => t.Status == query.Status);
+            var filteredTasks = await queryable
+                .Where(t => t.Status == query.Status.Value)
+                .ToListAsync(cancellationToken);
+
+            var mappedTasks = MapTasksToContracts(filteredTasks);
+
+            return Result.Ok(new PagedList<Contracts.Commons.Entities.Task>(
+                mappedTasks,
+                1,
+                filteredTasks.Count,
+                filteredTasks.Count));
         }
 
+        queryable = ApplyFilters(queryable, query);
+
+        var pagedList = await PagedListExtensions<TaskDataModel>.CreateAsync(
+            queryable,
+            query.Page,
+            query.PageSize,
+            cancellationToken);
+
+        var resultList = MapTasksToContracts(pagedList.Items);
+
+        return Result.Ok(new PagedList<Contracts.Commons.Entities.Task>(
+            resultList,
+            pagedList.Page,
+            pagedList.PageSize,
+            pagedList.TotalCount));
+    }
+
+    private static List<Contracts.Commons.Entities.Task> MapTasksToContracts(IEnumerable<TaskDataModel> tasks)
+    {
+        return tasks.Select(task => new Contracts.Commons.Entities.Task
+        {
+            Id = task.Id,
+            Title = task.Title,
+            Description = task.Description,
+            Priority = task.Priority,
+            Status = task.Status,
+            CreatedOn = task.CreatedOn,
+            ModifiedOn = task.ModifiedOn
+        }).ToList();
+    }
+
+    private IQueryable<TaskDataModel> ApplyFilters(IQueryable<TaskDataModel> queryable, GetAllTasksQuery query)
+    {
         if (query.Priority != null && query.Priority.HasValue)
         {
             queryable = queryable.Where(t => t.Priority == query.Priority.Value);
@@ -60,28 +98,6 @@ internal sealed class GetAllTasksQueryHandler : IRequestHandler<GetAllTasksQuery
             }
         }
 
-        var pagedList = await PagedListExtensions<TaskDataModel>.CreateAsync(
-            queryable,
-            query.Page,
-            query.PageSize,
-            cancellationToken);
-            //TODO EARLY RETURN
-            //TODO CHECK STATUS FILTER
-        var resultList = pagedList.Items.Select(task => new Contracts.Commons.Entities.Task
-        {
-            Id = task.Id,
-            Title = task.Title,
-            Description = task.Description,
-            Priority = task.Priority,
-            Status = task.Status,
-            CreatedOn = task.CreatedOn,
-            ModifiedOn = task.ModifiedOn
-        }).ToList();
-
-        return Result.Ok(new PagedList<Contracts.Commons.Entities.Task>(
-            resultList,
-            pagedList.Page,
-            pagedList.PageSize,
-            pagedList.TotalCount));
+        return queryable;
     }
 }
