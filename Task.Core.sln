@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\1.Utilities\Cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Hosts", "3.Hosts", "{33E7EA83-F1BE-4577-94E9-BED8F981A15B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Api.WebHost", "src\3.Hosts\Azuro.Core.Api.WebHost\TaskManager.Api.WebHost.csproj", "{AE03EA55-3EA4-4A2F-870A-F912A0E5CC63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Api.WebHost", "src\3.Hosts\TaskManager.Core.Api.WebHost\TaskManager.Api.WebHost.csproj", "{AE03EA55-3EA4-4A2F-870A-F912A0E5CC63}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task.Manager", "Task.Manager", "{EA40A86D-43AE-4E52-B744-66E048ECAABC}"
 EndProject

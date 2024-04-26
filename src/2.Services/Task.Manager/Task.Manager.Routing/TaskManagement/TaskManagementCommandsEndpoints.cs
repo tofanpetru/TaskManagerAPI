@@ -14,6 +14,18 @@ namespace Task.Manager.Routing.TaskManagement;
 
 internal sealed class TaskManagementCommandsEndpoints : IEndpointsDefinition
 {
+    private static class Routes
+    {
+        public const string Create = "/";
+        public const string CreateSummary = "Creates a new task.";
+
+        public const string Update = "/";
+        public const string UpdateSummary = "Updates an existing task.";
+
+        public const string DeleteTask = "/{id:guid}";
+        public const string DeleteTaskSummary = "Deletes a task by its ID.";
+    }
+
     public static void ConfigureEndpoints(IEndpointRouteBuilder app)
     {
         var versionSet = app.NewApiVersionSet()
@@ -26,29 +38,29 @@ internal sealed class TaskManagementCommandsEndpoints : IEndpointsDefinition
             .WithValidationFilter()
             .WithApiVersionSet(versionSet);
 
-        group.MapPost("/", CreateTaskAsync)
+        group.MapPost(Routes.Create, CreateTaskAsync)
             .Accepts<CreateTaskCommand>(MediaTypes.ApplicationJson)
             .Produces<Result<Guid>>(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status404NotFound)
             .ProducesValidationProblem()
             .WithName(nameof(CreateTaskAsync))
-            .WithSummary("Creates a new task.");
+            .WithSummary(Routes.CreateSummary);
 
-        group.MapDelete("/{id:guid}", DeleteTaskAsync)
+        group.MapDelete(Routes.DeleteTask, DeleteTaskAsync)
             .Produces(StatusCodes.Status202Accepted)
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest)
             .ProducesValidationProblem()
             .WithName(nameof(DeleteTaskAsync))
-            .WithSummary("Deletes a task by its ID.");
+            .WithSummary(Routes.DeleteTaskSummary);
 
-        group.MapPut("/", UpdateTaskAsync)
+        group.MapPut(Routes.Update, UpdateTaskAsync)
             .Accepts<UpdateTaskCommand>(MediaTypes.ApplicationJson)
             .Produces(StatusCodes.Status202Accepted)
             .Produces(StatusCodes.Status404NotFound)
             .ProducesValidationProblem()
             .WithName(nameof(UpdateTaskAsync))
-            .WithSummary("Updates an existing task.");
+            .WithSummary(Routes.UpdateSummary);
     }
 
     private static async Task<IResult> CreateTaskAsync(
@@ -58,7 +70,9 @@ internal sealed class TaskManagementCommandsEndpoints : IEndpointsDefinition
         var operation = await mediator.Send(command);
 
         return operation.IsSuccess
-            ? Results.Created()
+            ? Results.Created(
+                "/",
+                operation.Value)
             : operation.ToProblemDetails();
     }
 

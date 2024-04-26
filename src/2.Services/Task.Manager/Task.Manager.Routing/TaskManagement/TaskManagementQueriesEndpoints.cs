@@ -16,6 +16,15 @@ namespace Task.Manager.Routing.TaskManagement;
 
 internal sealed class TaskManagementQueriesEndpoints : IEndpointsDefinition
 {
+    private static class Routes
+    {
+        public const string GetById = "/{id:guid}";
+        public const string GetByIdSummary = "Fetches a paginated list of tasks with optional filters and sorting.";
+
+        public const string GetAll = "";
+        public const string GetAllSummary = "Fetches a paginated list of tasks with optional filters and sorting.";
+    }
+
     public static void ConfigureEndpoints(IEndpointRouteBuilder app)
     {
         var versionSet = app.NewApiVersionSet()
@@ -28,17 +37,17 @@ internal sealed class TaskManagementQueriesEndpoints : IEndpointsDefinition
             .WithValidationFilter()
             .WithApiVersionSet(versionSet);
 
-        group.MapGet("/{id:guid}", GetTaskByIdAsync)
+        group.MapGet(Routes.GetById, GetTaskByIdAsync)
              .Produces<Result<Contracts.Commons.Entities.Task>>(StatusCodes.Status200OK)
              .ProducesProblem(StatusCodes.Status404NotFound)
              .WithName(nameof(GetTaskByIdAsync))
-             .WithSummary("Retrieves a specific task by its unique identifier.");
+             .WithSummary(Routes.GetByIdSummary);
 
-        group.MapGet(string.Empty, GetAllTasksAsync)
+        group.MapGet(Routes.GetAll, GetAllTasksAsync)
              .Produces<Result<PagedList<Contracts.Commons.Entities.Task>>>(StatusCodes.Status200OK)
              .ProducesProblem(StatusCodes.Status404NotFound)
              .WithName(nameof(GetAllTasksAsync))
-             .WithSummary("Fetches a paginated list of tasks with optional filters and sorting.");
+             .WithSummary(Routes.GetAllSummary);
     }
 
     private static async Task<IResult> GetTaskByIdAsync(
