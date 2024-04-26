@@ -27,18 +27,18 @@ internal sealed class TaskManagementQueriesEndpoints : IEndpointsDefinition
             .WithOpenApi()
             .WithValidationFilter()
             .WithApiVersionSet(versionSet);
-        //TODO Add tmr all summaries
+
         group.MapGet("/{id:guid}", GetTaskByIdAsync)
              .Produces<Result<Contracts.Commons.Entities.Task>>(StatusCodes.Status200OK)
              .ProducesProblem(StatusCodes.Status404NotFound)
              .WithName(nameof(GetTaskByIdAsync))
-             .WithSummary("");
+             .WithSummary("Retrieves a specific task by its unique identifier.");
 
-        group.MapGet("", GetAllTasksAsync)
+        group.MapGet(string.Empty, GetAllTasksAsync)
              .Produces<Result<PagedList<Contracts.Commons.Entities.Task>>>(StatusCodes.Status200OK)
              .ProducesProblem(StatusCodes.Status404NotFound)
              .WithName(nameof(GetAllTasksAsync))
-             .WithSummary("");
+             .WithSummary("Fetches a paginated list of tasks with optional filters and sorting.");
     }
 
     private static async Task<IResult> GetTaskByIdAsync(

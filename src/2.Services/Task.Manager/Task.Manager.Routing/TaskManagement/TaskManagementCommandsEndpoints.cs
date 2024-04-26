@@ -32,7 +32,7 @@ internal sealed class TaskManagementCommandsEndpoints : IEndpointsDefinition
             .Produces(StatusCodes.Status404NotFound)
             .ProducesValidationProblem()
             .WithName(nameof(CreateTaskAsync))
-            .WithSummary("");
+            .WithSummary("Creates a new task.");
 
         group.MapDelete("/{id:guid}", DeleteTaskAsync)
             .Produces(StatusCodes.Status202Accepted)
@@ -40,7 +40,7 @@ internal sealed class TaskManagementCommandsEndpoints : IEndpointsDefinition
             .Produces(StatusCodes.Status400BadRequest)
             .ProducesValidationProblem()
             .WithName(nameof(DeleteTaskAsync))
-            .WithSummary("");
+            .WithSummary("Deletes a task by its ID.");
 
         group.MapPut("/", UpdateTaskAsync)
             .Accepts<UpdateTaskCommand>(MediaTypes.ApplicationJson)
@@ -48,7 +48,7 @@ internal sealed class TaskManagementCommandsEndpoints : IEndpointsDefinition
             .Produces(StatusCodes.Status404NotFound)
             .ProducesValidationProblem()
             .WithName(nameof(UpdateTaskAsync))
-            .WithSummary("");
+            .WithSummary("Updates an existing task.");
     }
 
     private static async Task<IResult> CreateTaskAsync(
